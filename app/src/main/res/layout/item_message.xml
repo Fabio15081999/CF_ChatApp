@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icProfileMessage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_profile"
+        app:civ_border_width="2dp"></de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/tvNameMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/icProfileMessage"
+        android:text="Teen cua nguoi gui tin nhan"
+        android:textSize="20sp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNameMessage"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/icProfileMessage"
+        android:text="noi dung tin nhan"></TextView>
+    <TextView
+        android:id="@+id/tvTimeReceive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMessage"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/icProfileMessage"
+        android:text="noi dung tin nhan"></TextView>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_menu"
+        android:layout_toEndOf="@id/tvNameMessage"
+        android:layout_marginLeft="15dp"
+        android:layout_alignBottom="@id/icProfileMessage"
+        android:layout_alignTop="@id/icProfileMessage"
+        ></ImageView>
+
+</RelativeLayout>
