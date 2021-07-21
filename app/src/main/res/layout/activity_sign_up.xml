@@ -18,8 +18,8 @@
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGN UP"
-        android:textSize="40sp"
+        android:text="Nhập Thông Tin "
+        android:textSize="30sp"
         android:textStyle="italic"
         android:textColor="#625EDD"
         android:layout_marginTop="40dp"
@@ -52,10 +52,10 @@
         app:layout_constraintTop_toBottomOf="@id/edtfirstName"></EditText>
 
     <EditText
-        android:id="@+id/edtPhone"
+        android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phone Number"
+        android:hint="Email"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -73,12 +73,13 @@
         android:layout_marginRight="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtPhone"></EditText>
+        app:layout_constraintTop_toBottomOf="@id/edtEmail"></EditText>
     <EditText
         android:id="@+id/edtPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="PassWord"
+        android:inputType="textPassword"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -91,7 +92,7 @@
         android:layout_height="wrap_content"
         app:cornerRadius="8dp"
         android:layout_marginTop="20dp"
-        android:text="SIGN UP"
+        android:text="Xác Thực"
         app:layout_constraintTop_toBottomOf="@id/edtPass"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></Button>

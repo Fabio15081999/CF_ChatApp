@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="164BE8"
+        android:background="#426BE4"
         >
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/btnProfile"
@@ -40,9 +40,11 @@
 
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListChat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/toolBarHome"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/toolBarHome"
+        android:layout_marginTop="15dp"></androidx.recyclerview.widget.RecyclerView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
         android:layout_width="70dp"

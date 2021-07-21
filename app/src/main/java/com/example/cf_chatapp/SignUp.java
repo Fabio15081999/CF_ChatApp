@@ -27,7 +27,7 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         edtfirstname =(EditText) findViewById(R.id.edtfirstName);
         edtlastname = (EditText) findViewById(R.id.edtLastName);
-        edtPhone = (EditText) findViewById(R.id.edtPhone);
+        edtPhone = (EditText) findViewById(R.id.edtEmail);
         edtPass = (EditText)findViewById(R.id.edtPass);
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
@@ -54,7 +54,6 @@ public class SignUp extends AppCompatActivity {
 
     public void SignUp(){
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
-
         String userID = mDatabase.push().getKey();
 
         final String firstName = edtfirstname.getText().toString().trim();
