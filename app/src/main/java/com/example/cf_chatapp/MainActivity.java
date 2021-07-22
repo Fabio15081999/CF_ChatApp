@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG ="MainActivity" ;
@@ -29,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+
         edtemailMain= (EditText)findViewById(R.id.edtUsernameMain);
         edtPassMain= (EditText)findViewById(R.id.edtPass);
         tvSignUp = (TextView) findViewById(R.id.tvSignUp);
@@ -43,44 +45,37 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignIn();
+                String email = edtemailMain.getText().toString();
+                String password = edtPassMain.getText().toString();
+                if (TextUtils.isEmpty(email)||TextUtils.isEmpty(password)){
+                    Toast.makeText(MainActivity.this, "khong duoc de trong cac truong !", Toast.LENGTH_SHORT).show();
+                }else{
+                    signIn(email, password);
+                }
 
             }
         });
     }
 
-    private void SignIn() {
+    private void signIn(String email, String password) {
         mAuth = FirebaseAuth.getInstance();
 //        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        String email = edtemailMain.getText().toString();
-        final  String password = edtPassMain.getText().toString();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-//                        progressBar.setVisibility(View.GONE);
-                        if (!task.isSuccessful()) {
-                            // there was an error
-                            if (password.length() < 6) {
-                                edtPassMain.setError("Mật khẩu phải từ 6 ký tự !");
-                            } else {
-                                Toast.makeText(MainActivity.this, "Lỗi Xác Thực", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
+                        if (task.isSuccessful()) {
                             Intent intent = new Intent(MainActivity.this, HomePage.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             finish();
+                        }else {
+                            Toast.makeText(MainActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
 
-    private void updateUI(FirebaseUser user) {
-    }
 }

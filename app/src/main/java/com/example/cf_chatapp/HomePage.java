@@ -12,7 +12,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class HomePage extends AppCompatActivity {
     Toolbar toolbar;
     ImageView btnProfile, btnSettings;
-    FloatingActionButton btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

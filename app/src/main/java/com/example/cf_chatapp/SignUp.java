@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +28,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class SignUp extends AppCompatActivity {
-    EditText edtEmail, edtPass;
+    EditText edtUsername, edtEmail, edtPass;
     Button btnSignUp;
     Toolbar toolbar;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mReference;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -42,6 +45,7 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        edtUsername = (EditText) findViewById(R.id.edtUserName);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPass = (EditText) findViewById(R.id.edtPass);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
@@ -55,23 +59,36 @@ public class SignUp extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        mAuth = FirebaseAuth.getInstance();
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignUp();
+              String username = edtUsername.getText().toString();
+              String email = edtEmail.getText().toString();
+              String password = edtPass.getText().toString();
+
+              if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){
+                  Toast.makeText(SignUp.this, "khong duoc de trong cac muc ", Toast.LENGTH_SHORT).show();
+              }else if (password.length() <6){
+                  Toast.makeText(SignUp.this, "pass phai lon hon 6 ky tu!", Toast.LENGTH_SHORT).show();
+              }else {
+                  signUp(username, email, password);
+
+              }
             }
         });
 
     }
 
-    public void SignUp(){
+    private void signUp(final String username, String email, String passWord) {
 //        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 //        String userID = mDatabase.push().getKey();
         mAuth = FirebaseAuth.getInstance();
-
-         String email = edtEmail.getText().toString().trim();
-         String passWord = edtPass.getText().toString().trim();
+//        username = edtUsername.getText().toString().trim();
+//        email = edtEmail.getText().toString().trim();
+//        passWord = edtPass.getText().toString().trim();
 
 
         mAuth.createUserWithEmailAndPassword(email, passWord)
@@ -79,17 +96,29 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(SignUp.this, "Success!", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            Intent intent = new Intent(SignUp.this, MainActivity.class);
-                            startActivity(intent);
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            assert firebaseUser != null;
+                            String userid = firebaseUser.getUid();
+                            mReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("id", userid);
+                            hashMap.put("username", username);
+                            hashMap.put("avatar","default");
+                            mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Intent intent = new Intent(SignUp.this, MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            });
+
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(SignUp.this, "Fail",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            Toast.makeText(SignUp.this, "you cant register with this email or password", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
