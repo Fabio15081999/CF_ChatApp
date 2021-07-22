@@ -29,50 +29,31 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"></TextView>
 
-    <EditText
-        android:id="@+id/edtUsernameMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="UserName"
-        android:textColorHint="#252424"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleApp"></EditText>
-
-    <EditText
-        android:id="@+id/edtPassWord"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="PassWord"
-        android:password="true"
-        android:textColorHint="#252424"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtUsernameMain"></EditText>
-
-    <Button
-        android:id="@+id/btnSignIn"
+    <com.sanojpunchihewa.glowbutton.GlowButton
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="#274BA6"
-        android:text="SIGN IN"
-        app:cornerRadius="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:buttonColor="#164BE8"
+        app:cornerRadius="50dp"
+        android:text="LOGIN"
+        app:glowColor="#885BFC"
+        app:pressedGlowSize="25dp"
+        app:unpressedGlowSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/titleApp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtPassWord"></Button>
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
         android:id="@+id/text_Sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:text="Bạn chưa có tài khoản? "
         android:textSize="15dp"
-        android:layout_gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSignIn"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"></TextView>
 
     <TextView
         android:id="@+id/tvSignUp"
@@ -83,6 +64,6 @@
         android:textColor="#164BE8"
         android:textSize="15dp"
         app:layout_constraintLeft_toRightOf="@id/text_Sign_up"
-        app:layout_constraintTop_toBottomOf="@id/btnSignIn"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -129,6 +129,4 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    private void updateUI(FirebaseUser user) {
-    }
 }
