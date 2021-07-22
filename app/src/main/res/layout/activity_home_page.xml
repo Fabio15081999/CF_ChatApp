@@ -45,13 +45,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/toolBarHome"
         android:layout_marginTop="15dp"></androidx.recyclerview.widget.RecyclerView>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAdd"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_plus"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtUsernameMain"></EditText>
 
     <Button
-        android:id="@+id/btbSignIn"
+        android:id="@+id/btnSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -72,7 +72,7 @@
         android:layout_gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btbSignIn"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn"></TextView>
 
     <TextView
         android:id="@+id/tvSignUp"
@@ -83,6 +83,6 @@
         android:textColor="#164BE8"
         android:textSize="15dp"
         app:layout_constraintLeft_toRightOf="@id/text_Sign_up"
-        app:layout_constraintTop_toBottomOf="@id/btbSignIn"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,37 +1,50 @@
 package com.example.cf_chatapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cf_chatapp.model.UserModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseError;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
-    EditText edtfirstname, edtlastname, edtPhone, edtPass, edtUsername;
+    EditText edtEmail, edtPass;
     Button btnSignUp;
     Toolbar toolbar;
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    public SignUp() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        edtfirstname =(EditText) findViewById(R.id.edtfirstName);
-        edtlastname = (EditText) findViewById(R.id.edtLastName);
-        edtPhone = (EditText) findViewById(R.id.edtEmail);
-        edtPass = (EditText)findViewById(R.id.edtPass);
-        edtUsername = (EditText)findViewById(R.id.edtUsername);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtPass = (EditText) findViewById(R.id.edtPass);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
-
 
 
         toolbar = (Toolbar) findViewById(R.id.toolBar);
@@ -53,21 +66,40 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void SignUp(){
-        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
-        String userID = mDatabase.push().getKey();
+//        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
+//        String userID = mDatabase.push().getKey();
+        mAuth = FirebaseAuth.getInstance();
 
-        final String firstName = edtfirstname.getText().toString().trim();
-        final String lastName = edtlastname.getText().toString().trim();
-        final String phone = edtPhone.getText().toString().trim();
-        final String userName = edtUsername.getText().toString().trim();
-        final String passWord = edtPass.getText().toString().trim();
+         String email = edtEmail.getText().toString().trim();
+         String passWord = edtPass.getText().toString().trim();
 
 
-        UserModel userModel = new UserModel(firstName, lastName, phone, userName, passWord  );
-        mDatabase.child(userID).setValue(userModel);
-        Toast.makeText(this, "Đăng ký thành công",Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(SignUp.this, MainActivity.class);
-        startActivity(intent);
+        mAuth.createUserWithEmailAndPassword(email, passWord)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(SignUp.this, "Success!", Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            Intent intent = new Intent(SignUp.this, MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(SignUp.this, "Fail",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
 
+
+//
+//
+
+    }
+
+    private void updateUI(FirebaseUser user) {
     }
 }
