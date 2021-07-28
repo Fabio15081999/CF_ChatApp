@@ -1,6 +1,7 @@
 package com.example.cf_chatapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cf_chatapp.MessageActivity;
 import com.example.cf_chatapp.R;
 import com.example.cf_chatapp.model.UserModel;
 import com.squareup.picasso.Picasso;
@@ -48,6 +50,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
 
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mcontext, MessageActivity.class);
+                intent.putExtra("userId", userModel.getId());
+                mcontext.startActivity(intent);
+            }
+        });
     }
 
 

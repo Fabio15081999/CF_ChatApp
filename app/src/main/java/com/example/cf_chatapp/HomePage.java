@@ -18,6 +18,8 @@ import com.example.cf_chatapp.Fragments.ContactsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomePage extends AppCompatActivity {
     Toolbar toolbar;
     ImageView btnProfile, btnSettings;
