@@ -56,28 +56,6 @@ public class ContactsFragment extends Fragment {
         return view;
     }
 
-//    private void readUsers() {
-//        UserModel userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//        userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//        userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//        userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//        userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//        userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//        userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//        userModel = new UserModel("1", "phong", "default", "phong4@gmail.com");
-//        mUsers.add(userModel);
-//
-//
-//    }
-
-
     private void readUsers() {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
