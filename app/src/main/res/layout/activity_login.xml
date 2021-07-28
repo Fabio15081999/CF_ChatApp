@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFDFD"
-    android:padding="15dp"
     tools:context=".MainActivity">
-
-
-
-    <TextView
-        android:id="@+id/titleApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textSize="50sp"
-        android:textStyle="italic"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLogin"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#2ab1e0"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"></TextView>
-
+        app:layout_constraintRight_toRightOf="parent"></androidx.appcompat.widget.Toolbar>
     <EditText
         android:id="@+id/edtUsernameMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:hint="UserName"
-        android:textColorHint="#252424"
+        android:hint="Email"
+        android:textColorHint="#6E6A6A"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleApp"></EditText>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLogin"></EditText>
 
     <EditText
         android:id="@+id/edtPassWord"
@@ -37,9 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:hint="PassWord"
-        android:password="true"
-        android:textColorHint="#252424"
+        android:inputType="textPassword"
+        android:textColorHint="#6E6A6A"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtUsernameMain"></EditText>
 
     <Button

@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
     TextView tvSignUp;
     Button btnLogin;
 
@@ -19,19 +18,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvSignUp = (TextView) findViewById(R.id.tvSignUp);
+        btnLogin = (Button) findViewById(R.id.btnLoginMain);
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SignUp.class);
-                startActivity(intent);
+               startActivity(new Intent(MainActivity.this, SignUp.class));
             }
         });
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, Login.class));
             }
         });
     }

@@ -83,12 +83,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void signUp(final String username, String email, String passWord) {
-//        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
-//        String userID = mDatabase.push().getKey();
         mAuth = FirebaseAuth.getInstance();
-//        username = edtUsername.getText().toString().trim();
-//        email = edtEmail.getText().toString().trim();
-//        passWord = edtPass.getText().toString().trim();
 
 
         mAuth.createUserWithEmailAndPassword(email, passWord)
@@ -104,6 +99,7 @@ public class SignUp extends AppCompatActivity {
                             hashMap.put("id", userid);
                             hashMap.put("username", username);
                             hashMap.put("avatar","default");
+                            hashMap.put("email",email);
                             mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
