@@ -44,13 +44,12 @@ public class ContactsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
         recyclerView = view.findViewById(R.id.rvContacts);
         recyclerView.setHasFixedSize(true);
-        mUsers=new ArrayList<>();
+        mUsers = new ArrayList<>();
         readUsers();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
         adapter = new UsersAdapter(getActivity(), mUsers);
         recyclerView.setAdapter(adapter);
-
 
 
         return view;
@@ -59,18 +58,21 @@ public class ContactsFragment extends Fragment {
     private void readUsers() {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
-//        String userId = firebaseUser.getUid();
+        String userId = firebaseUser.getUid();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-               for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                   UserModel userModel = dataSnapshot.getValue(UserModel.class );
-                   mUsers.add(userModel);
-               }
-               adapter.notifyDataSetChanged();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                    if (!userModel.getId().equals(userId)) {
+                        mUsers.add(userModel);
+                    }
 
-               //Log.d(TAG, "User name: " + mUsers.() + ", email: " + userModel.getEmail()+"avatar: "+userModel.getAvatar());
+                }
+                adapter.notifyDataSetChanged();
+
+                //Log.d(TAG, "User name: " + mUsers.() + ", email: " + userModel.getEmail()+"avatar: "+userModel.getAvatar());
 
             }
 

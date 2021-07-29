@@ -29,9 +29,9 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        tvtiltle = (TextView) findViewById(R.id.tvtoolbarTitle);
+        tvtiltle =findViewById(R.id.tvtoolbarTitle);
 
-        toolbar = (Toolbar) findViewById(R.id.toolBarHome);
+        toolbar =  findViewById(R.id.toolBarHome);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
