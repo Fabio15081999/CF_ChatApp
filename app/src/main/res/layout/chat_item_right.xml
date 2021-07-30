@@ -22,7 +22,7 @@
         android:background="@drawable/backgroung_right"
         android:text="day la dai tieng oi viet nam"
         android:layout_alignParentEnd="true"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:padding="8dp"
         android:layout_alignParentRight="true"
         android:textColor="@color/white"

@@ -55,6 +55,8 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         img = (CircleImageView) findViewById(R.id.imgProfileChat);
         tvusername = (TextView) findViewById(R.id.tvUsernameChat);
         edtmessage =  (EditText )findViewById(R.id.edtmessage); 
@@ -127,7 +129,8 @@ public class ChatActivity extends AppCompatActivity {
                 mchat.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Chat chat = dataSnapshot.getValue(Chat.class);
-                    if (chat.getReceiver().equals(userid) && chat.getSender().equals(myid)){
+                    if (chat.getReceiver().equals(myid) && chat.getSender().equals(userid)||
+                    chat.getReceiver().equals(userid)&& chat.getSender().equals(myid)){
                         mchat.add(chat);
                     }
                     adapter = new MessageAdapter(ChatActivity.this, mchat, imageurl);

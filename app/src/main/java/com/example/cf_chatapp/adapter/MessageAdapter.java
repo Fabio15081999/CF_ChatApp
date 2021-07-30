@@ -38,6 +38,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        RecyclerView.ViewHolder viewHolder;
+//        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//
+//        switch (viewType) {
+//            case MSG_TYPE_LEFT:
+//                View v2 = inflater.inflate(R.layout.chat_item_left, parent, false);
+//                viewHolder = new HolderYou(v2);
+//                break;
+//            default:
+//                View v = inflater.inflate(R.layout.chat_item_right, parent, false);
+//                viewHolder = new HolderMe(v);
+//                break;
+//        }
+//        return  viewHolder;
         if (viewType == MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
             return new MessageAdapter.ViewHolder(view);
@@ -58,7 +72,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else {
             Picasso.get().load(imageurl).into(holder.profile_image);
-           // Glide.with(mContext).load(imageurl).into(holder.profile_image);
         }
 
 //        if (position == mChat.size()-1){
