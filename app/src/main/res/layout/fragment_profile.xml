@@ -7,6 +7,7 @@
     android:padding="8dp"
     tools:context=".Fragments.ProfileFragment">
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
@@ -44,6 +45,24 @@
             android:layout_marginBottom="20dp"
             ></TextView>
         </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_below="@id/cardview1"
+        android:layout_marginTop="20dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/btnsignOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"
+            android:padding="8dp"
+            android:textSize="15sp"
+            android:textColor="#EA0B0B"
+            android:layout_marginLeft="15dp"></TextView>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

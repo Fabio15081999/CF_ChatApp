@@ -17,6 +17,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cf_chatapp.Login;
 import com.example.cf_chatapp.R;
 import com.example.cf_chatapp.model.UserModel;
 import com.google.android.gms.tasks.Continuation;
@@ -45,7 +46,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
     CircleImageView imageView;
-    TextView tvUsername;
+    TextView tvUsername, signOut;
     DatabaseReference reference;
     FirebaseUser firebaseUser;
     StorageReference storageReference;
@@ -61,6 +62,14 @@ public class ProfileFragment extends Fragment {
 
         imageView = view.findViewById(R.id.profile_img_frag);
         tvUsername = view.findViewById(R.id.tvUsername_frag);
+        signOut = view.findViewById(R.id.btnsignOut);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getContext(), Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
 
         storageReference = FirebaseStorage.getInstance().getReference("Uploads");
 

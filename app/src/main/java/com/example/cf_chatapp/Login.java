@@ -17,12 +17,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class Login extends AppCompatActivity {
     private  Toolbar toolbar;
     EditText edtEmailLogin, edtPasswordLogin;
     Button btnLogin;
     private FirebaseAuth mAuth;
+    DatabaseReference reference;
+    FirebaseUser firebaseUser;
 
 
     @Override
@@ -68,13 +75,16 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(Login.this, HomePage.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
-                            finish();
+//                            finish();
                         } else {
                             Toast.makeText(Login.this, "Failed!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
+
 }

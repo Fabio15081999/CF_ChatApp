@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="5dp"
     android:background="#E3E6E6"
     app:cardCornerRadius="5dp"
@@ -12,31 +12,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@mipmap/ic_launcher"
-            ></de.hdodenhof.circleimageview.CircleImageView>
+            android:src="@mipmap/ic_launcher"></de.hdodenhof.circleimageview.CircleImageView>
+
         <TextView
             android:id="@+id/tvUsernameContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username"
-            android:layout_toRightOf="@+id/profile_img"
             android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/profile_img"
+            android:text="username"
             android:textSize="20sp"
-            android:textStyle="bold"
-            ></TextView>
+            android:textStyle="bold"></TextView>
+
         <TextView
             android:id="@+id/tvEmailContacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvUsernameContact"
-            android:layout_toRightOf="@id/profile_img"
             android:layout_marginLeft="10dp"
-            android:textSize="18sp"
-            android:text="email"></TextView>
+            android:layout_toRightOf="@id/profile_img"
+            android:text="email"
+            android:textSize="10sp"></TextView>
+
+        <ImageView
+            android:id="@+id/img_on"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@id/profile_img"
+            android:layout_marginLeft="-15dp"
+            android:layout_toEndOf="@id/profile_img"
+            android:layout_toRightOf="@+id/profile_img"
+            android:src="@drawable/online_stt"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+           ></ImageView>
+
+        <ImageView
+            android:id="@+id/img_off"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@id/profile_img"
+            android:layout_marginLeft="-15dp"
+            android:layout_toEndOf="@id/profile_img"
+            android:layout_toRightOf="@+id/profile_img"
+            android:visibility="gone"
+            android:src="@drawable/offline_stt"
+            android:scaleType="fitXY"></ImageView>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

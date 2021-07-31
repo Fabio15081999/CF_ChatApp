@@ -56,6 +56,12 @@ public class ChatActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ChatActivity.this, HomePage.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
 
         img = (CircleImageView) findViewById(R.id.imgProfileChat);
         tvusername = (TextView) findViewById(R.id.tvUsernameChat);
@@ -144,5 +150,25 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void userStatus(String status) {
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
+        reference.updateChildren(map);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userStatus("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        userStatus("offline");
     }
 }

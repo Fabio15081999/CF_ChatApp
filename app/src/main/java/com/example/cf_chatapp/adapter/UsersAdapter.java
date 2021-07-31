@@ -18,15 +18,19 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
     private Context mcontext;
     private List<UserModel> mUsers;
+    private boolean isonline;
 
-    public UsersAdapter(Context mcontext, List<UserModel> mUsers) {
+    public UsersAdapter(Context mcontext, List<UserModel> mUsers, boolean isonline) {
         super();
         this.mcontext = mcontext;
         this.mUsers = mUsers;
+        this.isonline = isonline;
     }
 
     @NonNull
@@ -49,6 +53,18 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             Picasso.get().load(userModel.getAvatar()).into(holder.imProfile);
 
 
+        }
+        if (isonline){
+            if (userModel.getStatus().equals("online")){
+                holder.im_status_on.setVisibility(View.VISIBLE);
+                holder.im_status_off.setVisibility(View.GONE);
+            }else {
+                holder.im_status_on.setVisibility(View.GONE);
+                holder.im_status_off.setVisibility(View.VISIBLE);
+            }
+        }else {
+            holder.im_status_on.setVisibility(View.GONE);
+            holder.im_status_off.setVisibility(View.GONE);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +89,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView username, email;
         ImageView imProfile;
+        private ImageView im_status_on;
+        private ImageView im_status_off;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.tvUsernameContact);
             email = itemView.findViewById(R.id.tvEmailContacts);
             imProfile = itemView.findViewById(R.id.profile_img);
+            im_status_on = itemView.findViewById(R.id.img_on);
+            im_status_off= itemView.findViewById(R.id.img_off);
         }
     }
 

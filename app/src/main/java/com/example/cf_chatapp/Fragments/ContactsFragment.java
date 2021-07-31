@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ContactsFragment extends Fragment {
@@ -36,6 +37,7 @@ public class ContactsFragment extends Fragment {
     private List<UserModel> mUsers = new ArrayList<>();
     private DatabaseReference mDatabase;
     private Context mContext;
+
 
 
     @Override
@@ -48,7 +50,7 @@ public class ContactsFragment extends Fragment {
         readUsers();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new UsersAdapter(getActivity(), mUsers);
+        adapter = new UsersAdapter(getActivity(), mUsers,true);
         recyclerView.setAdapter(adapter);
 
 

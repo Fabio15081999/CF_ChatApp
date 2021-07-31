@@ -18,6 +18,12 @@ import com.example.cf_chatapp.Fragments.ContactsFragment;
 import com.example.cf_chatapp.Fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,6 +31,8 @@ public class HomePage extends AppCompatActivity {
     Toolbar toolbar;
     ImageView btnProfile, btnSettings;
     TextView tvtiltle;
+    DatabaseReference reference;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,13 @@ public class HomePage extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout_homepage, new ChatsFragment())
+                .commit();
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         BottomNavigationView navigationView = findViewById(R.id.bottomNav);
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -73,5 +88,24 @@ public class HomePage extends AppCompatActivity {
         transaction.commit();
     }
 
+    private void userStatus(String status) {
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
+        reference.updateChildren(map);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userStatus("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        userStatus("offline");
+    }
 
 }

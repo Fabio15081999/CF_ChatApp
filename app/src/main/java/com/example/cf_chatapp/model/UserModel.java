@@ -6,20 +6,28 @@ public class UserModel {
     private String username;
     private String avatar;
     private String email;
+    private String status;
 
 
-    public UserModel(String id, String username, String avatar, String email) {
+    public UserModel(String id, String username, String avatar, String email, String status) {
         this.id = id;
         this.username = username;
-
         this.avatar = avatar;
         this.email = email;
+        this.status = status;
     }
 
     public UserModel() {
 
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;
