@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.cf_chatapp.Fragments.ChatsFragment;
 import com.example.cf_chatapp.Fragments.ContactsFragment;
+import com.example.cf_chatapp.Fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -29,9 +30,9 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        tvtiltle =findViewById(R.id.tvtoolbarTitle);
+        tvtiltle = findViewById(R.id.tvtoolbarTitle);
 
-        toolbar =  findViewById(R.id.toolBarHome);
+        toolbar = findViewById(R.id.toolBarHome);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -41,17 +42,20 @@ public class HomePage extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.action_home:
-                        Toast.makeText(HomePage.this, "Home", Toast.LENGTH_SHORT).show();
                         tvtiltle.setText("Chat");
                         fragment = new ChatsFragment();
                         loadFragment(fragment);
                         break;
                     case R.id.action_contacts:
-                        Toast.makeText(HomePage.this, "Contacts", Toast.LENGTH_SHORT).show();
                         tvtiltle.setText("Contacts");
                         fragment = new ContactsFragment();
+                        loadFragment(fragment);
+                        break;
+                    case R.id.action_profile:
+                        tvtiltle.setText("Profile");
+                        fragment = new ProfileFragment();
                         loadFragment(fragment);
                         break;
 
@@ -64,7 +68,7 @@ public class HomePage extends AppCompatActivity {
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout_homepage,fragment);
+        transaction.replace(R.id.frame_layout_homepage, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

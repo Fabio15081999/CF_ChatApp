@@ -8,5 +8,9 @@
         android:id="@+id/action_contacts"
         android:icon="@drawable/ic_contact_book"
         android:title="@string/contacts"></item>
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/ic_profile_nav"
+        android:title="@string/profile"></item>
 
 </menu>
