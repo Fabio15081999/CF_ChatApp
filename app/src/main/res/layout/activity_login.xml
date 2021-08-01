@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFDFD"
+    android:background="#2ab1e0"
     tools:context=".MainActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarLogin"
@@ -19,11 +19,14 @@
         android:id="@+id/edtUsernameMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:hint="Email"
         android:textColorHint="#6E6A6A"
+        android:textSize="25sp"
+        android:background="@drawable/custom_edittext"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:padding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarLogin"></EditText>
@@ -35,9 +38,12 @@
         android:layout_marginTop="15dp"
         android:hint="PassWord"
         android:inputType="textPassword"
+        android:background="@drawable/custom_edittext"
+        android:textSize="25sp"
         android:textColorHint="#6E6A6A"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:padding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtUsernameMain"></EditText>
@@ -47,11 +53,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="#274BA6"
+        android:background="@drawable/custom_button"
         android:text="LOGIN"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edtPassWord"></Button>
+    <TextView
+        android:id="@+id/forgot_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Forgot your password ?"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        ></TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

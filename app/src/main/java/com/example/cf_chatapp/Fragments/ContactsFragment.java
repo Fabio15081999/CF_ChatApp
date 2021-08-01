@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cf_chatapp.MainActivity;
@@ -24,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -37,7 +41,7 @@ public class ContactsFragment extends Fragment {
     private List<UserModel> mUsers = new ArrayList<>();
     private DatabaseReference mDatabase;
     private Context mContext;
-
+    private EditText searchUser;
 
 
     @Override
@@ -48,13 +52,60 @@ public class ContactsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         mUsers = new ArrayList<>();
         readUsers();
+        searchUser = view.findViewById(R.id.search_user);
+        searchUser.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                searchUser(charSequence.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new UsersAdapter(getActivity(), mUsers,true);
+        adapter = new UsersAdapter(getActivity(), mUsers, true);
         recyclerView.setAdapter(adapter);
 
 
         return view;
+    }
+
+    private void searchUser(String s) {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
+                .startAt(s)
+                .endAt(s+"\uf8ff");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mUsers.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                    assert userModel != null;
+                    assert firebaseUser != null;
+                    if (!userModel.getId().equals(firebaseUser.getUid())){
+                        mUsers.add(userModel);
+                    }
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void readUsers() {
@@ -64,17 +115,16 @@ public class ContactsFragment extends Fragment {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (searchUser.getText().toString().equals("")){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                        if (!userModel.getId().equals(userId)) {
+                            mUsers.add(userModel);
+                        }
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                    if (!userModel.getId().equals(userId)) {
-                        mUsers.add(userModel);
                     }
-
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
-
-                //Log.d(TAG, "User name: " + mUsers.() + ", email: " + userModel.getEmail()+"avatar: "+userModel.getAvatar());
 
             }
 

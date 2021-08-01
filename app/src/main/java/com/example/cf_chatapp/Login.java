@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseReference reference;
     FirebaseUser firebaseUser;
+    TextView tvResetPass;
 
 
     @Override
@@ -42,6 +44,19 @@ public class Login extends AppCompatActivity {
         actionBar.setTitle("LOGIN");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
+        tvResetPass = findViewById(R.id.forgot_pass);
+        tvResetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, ResetPasswordActivity.class));
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
 

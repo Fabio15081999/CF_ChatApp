@@ -100,6 +100,7 @@ public class SignUp extends AppCompatActivity {
                             hashMap.put("username", username);
                             hashMap.put("avatar","default");
                             hashMap.put("email",email);
+                            hashMap.put("search", username.toLowerCase());
                             mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

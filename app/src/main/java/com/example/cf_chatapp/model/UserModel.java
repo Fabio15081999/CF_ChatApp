@@ -7,18 +7,28 @@ public class UserModel {
     private String avatar;
     private String email;
     private String status;
+    private String search;
 
 
-    public UserModel(String id, String username, String avatar, String email, String status) {
+    public UserModel(String id, String username, String avatar, String email, String status, String search) {
         this.id = id;
         this.username = username;
         this.avatar = avatar;
         this.email = email;
         this.status = status;
+        this.search= search;
     }
 
     public UserModel() {
 
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     public String getStatus() {

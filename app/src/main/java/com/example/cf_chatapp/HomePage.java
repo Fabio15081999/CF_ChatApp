@@ -16,14 +16,20 @@ import android.widget.Toast;
 import com.example.cf_chatapp.Fragments.ChatsFragment;
 import com.example.cf_chatapp.Fragments.ContactsFragment;
 import com.example.cf_chatapp.Fragments.ProfileFragment;
+import com.example.cf_chatapp.model.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -50,8 +56,8 @@ public class HomePage extends AppCompatActivity {
                 .commit();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        btnProfile = findViewById(R.id.btnProfile);
         BottomNavigationView navigationView = findViewById(R.id.bottomNav);
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -107,5 +113,32 @@ public class HomePage extends AppCompatActivity {
         super.onPause();
         userStatus("offline");
     }
+
+//    private void loadProfileImg() {
+//        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String userId = firebaseUser.getUid();
+//        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
+//                    if (userModel.getAvatar().equals("default")) {
+//                        btnProfile.setImageResource(R.mipmap.ic_launcher);
+//                    } else {
+//                        Picasso.get().load(userModel.getAvatar()).into(btnProfile);
+//                    }
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//
+//    }
 
 }
