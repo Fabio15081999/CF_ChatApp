@@ -1,4 +1,4 @@
-package com.example.cf_chatapp.model;
+package com.example.cf_chatapp.Model;
 
 public class UserModel {
 

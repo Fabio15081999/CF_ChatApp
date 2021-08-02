@@ -10,17 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.cf_chatapp.MainActivity;
 import com.example.cf_chatapp.R;
-import com.example.cf_chatapp.adapter.UsersAdapter;
-import com.example.cf_chatapp.model.UserModel;
+import com.example.cf_chatapp.Adapter.UsersAdapter;
+import com.example.cf_chatapp.Model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +29,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ContactsFragment extends Fragment {

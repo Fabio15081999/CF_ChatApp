@@ -28,13 +28,6 @@
             android:textColor="@color/white"
             android:layout_gravity="center"></TextView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/btnSettings"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/ic_settings"></de.hdodenhof.circleimageview.CircleImageView>
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -43,6 +36,7 @@
         android:id="@+id/frame_layout_homepage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#CDCCCC"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -59,6 +53,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/custom_bottomnav"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
     <!--    <com.google.android.material.tabs.TabLayout-->
     <!--        android:id="@+id/tab_layout"-->
     <!--        android:layout_width="match_parent"-->

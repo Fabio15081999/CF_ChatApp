@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class Login extends AppCompatActivity {
     DatabaseReference reference;
     FirebaseUser firebaseUser;
     TextView tvResetPass;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -79,6 +81,8 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+        progressBar = findViewById(R.id.progress_bar_login);
+
     }
 
     private void login(String email, String pass) {
@@ -93,6 +97,7 @@ public class Login extends AppCompatActivity {
                             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+                            progressBar.setVisibility(View.VISIBLE);
 //                            finish();
                         } else {
                             Toast.makeText(Login.this, "Failed!", Toast.LENGTH_SHORT).show();

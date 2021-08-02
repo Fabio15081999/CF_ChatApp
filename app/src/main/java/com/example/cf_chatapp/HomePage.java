@@ -9,33 +9,26 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cf_chatapp.Fragments.ChatsFragment;
 import com.example.cf_chatapp.Fragments.ContactsFragment;
 import com.example.cf_chatapp.Fragments.ProfileFragment;
-import com.example.cf_chatapp.model.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
-import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomePage extends AppCompatActivity {
     Toolbar toolbar;
-    ImageView btnProfile, btnSettings;
+    ImageView btnProfile;
     TextView tvtiltle;
     DatabaseReference reference;
     FirebaseUser firebaseUser;

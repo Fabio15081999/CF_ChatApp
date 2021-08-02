@@ -6,7 +6,9 @@
     android:layout_marginBottom="5dp"
     android:background="#E3E6E6"
     app:cardCornerRadius="5dp"
-    app:cardElevation="5dp">
+    app:cardElevation="5dp"
+   android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,8 +17,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@mipmap/ic_launcher"></de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
@@ -63,6 +65,17 @@
             android:visibility="gone"
             android:src="@drawable/offline_stt"
             android:scaleType="fitXY"></ImageView>
+        <TextView
+            android:id="@+id/tvLastMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_below="@id/tvEmailContacts"
+            android:layout_toRightOf="@id/profile_img"
+            android:layout_marginLeft="10dp"
+            android:text="last message"
+            android:maxLines="1"></TextView>
     </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>

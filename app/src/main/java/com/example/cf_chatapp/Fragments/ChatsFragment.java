@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.cf_chatapp.R;
-import com.example.cf_chatapp.adapter.UsersAdapter;
-import com.example.cf_chatapp.model.Chat;
-import com.example.cf_chatapp.model.UserModel;
+import com.example.cf_chatapp.Adapter.UsersAdapter;
+import com.example.cf_chatapp.Model.Chat;
+import com.example.cf_chatapp.Model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ public class ChatsFragment extends Fragment {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     private List<String> usersList;
+    private ProgressBar progressBar ;
 
 
     @Override

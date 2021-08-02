@@ -1,4 +1,4 @@
-package com.example.cf_chatapp.adapter;
+package com.example.cf_chatapp.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cf_chatapp.R;
-import com.example.cf_chatapp.model.Chat;
+import com.example.cf_chatapp.Model.Chat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
