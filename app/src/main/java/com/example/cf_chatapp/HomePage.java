@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,12 +18,19 @@ import android.widget.TextView;
 import com.example.cf_chatapp.Fragments.ChatsFragment;
 import com.example.cf_chatapp.Fragments.ContactsFragment;
 import com.example.cf_chatapp.Fragments.ProfileFragment;
+import com.example.cf_chatapp.Model.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -32,6 +40,7 @@ public class HomePage extends AppCompatActivity {
     TextView tvtiltle;
     DatabaseReference reference;
     FirebaseUser firebaseUser;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,7 @@ public class HomePage extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         btnProfile = findViewById(R.id.btnProfile);
+        loadProfileImg();
         BottomNavigationView navigationView = findViewById(R.id.bottomNav);
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -107,7 +117,32 @@ public class HomePage extends AppCompatActivity {
         userStatus("offline");
     }
 
-//    private void loadProfileImg() {
+    private void loadProfileImg() {
+
+        storageReference = FirebaseStorage.getInstance().getReference("Uploads");
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserModel userModel = snapshot.getValue(UserModel.class);
+                if (userModel.getAvatar().equals("default")) {
+                    btnProfile.setImageResource(R.mipmap.ic_launcher);
+                } else {
+                    Picasso.get().load(userModel.getAvatar()).into(btnProfile);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
 //        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 //        String userId = firebaseUser.getUid();
 //        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
@@ -115,6 +150,8 @@ public class HomePage extends AppCompatActivity {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    String data = dataSnapshot.toString();
+//                    Log.d("AAAAA", data );
 //                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
 //                    if (userModel.getAvatar().equals("default")) {
 //                        btnProfile.setImageResource(R.mipmap.ic_launcher);

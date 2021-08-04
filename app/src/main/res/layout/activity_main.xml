@@ -37,14 +37,16 @@
        app:layout_constraintLeft_toLeftOf="parent"
        app:layout_constraintRight_toRightOf="parent"></Button>
 
+
     <TextView
         android:id="@+id/text_Sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:text="Bạn chưa có tài khoản? "
         android:textSize="15dp"
+        app:layout_constraintHorizontal_bias="0.361"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLoginMain"></TextView>
@@ -53,7 +55,8 @@
         android:id="@+id/tvSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
         android:text="Đăng Ký "
         android:textColor="#164BE8"
         android:textSize="15dp"

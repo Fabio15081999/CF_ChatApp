@@ -12,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.cf_chatapp.Model.ChatList;
+import com.example.cf_chatapp.Notification.Token;
 import com.example.cf_chatapp.R;
 import com.example.cf_chatapp.Adapter.UsersAdapter;
 import com.example.cf_chatapp.Model.Chat;
 import com.example.cf_chatapp.Model.UserModel;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +39,8 @@ public class ChatsFragment extends Fragment {
     private List<UserModel> mUsers;
     FirebaseUser firebaseUser;
     DatabaseReference reference;
-    private List<String> usersList;
-    private ProgressBar progressBar ;
+    private List<ChatList> chatListArr;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -46,55 +52,46 @@ public class ChatsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        usersList = new ArrayList<>();
-
-        reference = FirebaseDatabase.getInstance().getReference("chats");
+        chatListArr = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("Chatlist").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usersList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Chat chat = dataSnapshot.getValue(Chat.class);
-                    if (chat.getSender().equals(firebaseUser.getUid())){
-                        usersList.add(chat.getReceiver());
-                    }
-                    if (chat.getReceiver().equals(firebaseUser.getUid())){
-                        usersList.add(chat.getSender());
-                    }
-
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                chatListArr.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    ChatList chatList = dataSnapshot.getValue(ChatList.class);
+                    chatListArr.add(chatList);
                 }
-                readChats();
+                chatListMethod();
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });
+
+
         return view;
     }
 
-    private void readChats() {
-        mUsers = new ArrayList<>();
 
+
+
+    private void chatListMethod() {
+        mUsers = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 mUsers.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                    for (String id: usersList){
-                        if (userModel.getId().equals(id)){
-                            if (mUsers.size()!=0){
-                                for (UserModel userModel1 :mUsers){
-                                    if (!userModel.getId().equals(userModel1.getId())){
-                                        mUsers.add(userModel);
-                                    }
-                                }
-                            } else {
-                                mUsers.add(userModel);
-                            }
+                    for (ChatList chatList : chatListArr) {
+                        assert userModel != null;
+                        if (userModel.getId().equals(chatList.getId())) {
+                            mUsers.add(userModel);
                         }
                     }
                 }
@@ -103,12 +100,12 @@ public class ChatsFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });
-
     }
+
 
 }
 
