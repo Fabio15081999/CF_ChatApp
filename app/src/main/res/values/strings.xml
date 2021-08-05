@@ -4,6 +4,8 @@
     <string name="contacts">Contacts</string>
     <string name="profile">Profile</string>
 
+    <string name="facebook_app_id">1269442603474387</string>
+    <string name="fb_login_protocol_scheme">fb1269442603474387</string>
 
 
 </resources>
