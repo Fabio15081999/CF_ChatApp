@@ -16,14 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cf_chatapp.Adapter.MessageAdapter;
+import com.example.cf_chatapp.Fragments.APIService;
 import com.example.cf_chatapp.Model.Chat;
 import com.example.cf_chatapp.Model.UserModel;
+import com.example.cf_chatapp.Notification.Client;
+import com.example.cf_chatapp.Notification.Data;
+import com.example.cf_chatapp.Notification.MyReponse;
+import com.example.cf_chatapp.Notification.Sender;
+import com.example.cf_chatapp.Notification.Token;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -34,6 +41,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -48,6 +58,8 @@ public class ChatActivity extends AppCompatActivity {
     List<Chat> mchat;
     String userId;
     Intent i;
+    APIService apiService;
+    boolean notify = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +77,7 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(new Intent(ChatActivity.this, HomePage.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
+        apiService = Client.getClient("https://fcm.googleapis.com").create(APIService.class);
 
         img = (CircleImageView) findViewById(R.id.imgProfileChat);
         tvusername = (TextView) findViewById(R.id.tvUsernameChat);
@@ -105,6 +118,7 @@ public class ChatActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                notify = true;
                 String msg = edtmessage.getText().toString();
                 if (!msg.equals("")) {
                     sendmessage(firebaseUser.getUid(), userId, msg);
@@ -145,6 +159,70 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+        final DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(userId)
+                .child(firebaseUser.getUid());
+        chatRefReceiver.child("id").setValue(firebaseUser.getUid());
+
+        final String msg = message;
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if (notify){
+                    UserModel userModel = snapshot.getValue(UserModel.class);
+                    sendNotification(receiver, userModel.getUsername(), msg);
+
+
+                }
+                notify = false;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    private void sendNotification(String receiver, String username, String message) {
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(receiver);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Token token = dataSnapshot.getValue(Token.class);
+                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher, username + ": " + message, "New Message", userId);
+                    Sender sender = new Sender(data, token.getToken());
+                    apiService.sendNotification(sender).enqueue(new Callback<MyReponse>() {
+                        @Override
+                        public void onResponse(Call<MyReponse> call, Response<MyReponse> response) {
+                            if (response.code() == 200) {
+                                assert response.body() != null;
+                                if (response.body().success != 1) {
+
+                                    Toast.makeText(ChatActivity.this, "Failed! to send notificaation", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull Call<MyReponse> abccall, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
@@ -195,5 +273,5 @@ public class ChatActivity extends AppCompatActivity {
         userStatus("offline");
     }
 
-//    private void getToken(String message, String )
+
 }

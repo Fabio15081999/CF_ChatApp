@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //
     implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+    implementation 'com.google.firebase:firebase-messaging-directboot:20.2.0'
 
 
 }

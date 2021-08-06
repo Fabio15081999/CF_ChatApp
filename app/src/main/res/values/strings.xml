@@ -6,6 +6,7 @@
 
     <string name="facebook_app_id">1269442603474387</string>
     <string name="fb_login_protocol_scheme">fb1269442603474387</string>
+    <string name="default_notification_channel_id">FCM mess channel</string>
 
 
 </resources>
