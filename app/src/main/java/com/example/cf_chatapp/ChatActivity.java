@@ -195,7 +195,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Token token = dataSnapshot.getValue(Token.class);
-                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher, username + ": " + message, "New Message", userId);
+                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_main, username + ": " + message, "New Message", userId);
                     Sender sender = new Sender(data, token.getToken());
                     apiService.sendNotification(sender).enqueue(new Callback<MyReponse>() {
                         @Override
