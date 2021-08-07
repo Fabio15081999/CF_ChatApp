@@ -10,7 +10,7 @@
         android:id="@+id/toolBarHome"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#426BE4"
+        android:background="@drawable/bg_splash"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">

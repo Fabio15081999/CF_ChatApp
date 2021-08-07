@@ -29,8 +29,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         String sented = remoteMessage.getData().get("sented");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//        && sented.equals(firebaseUser.getUid())
-        if (firebaseUser != null ) {
+        if (firebaseUser != null && sented.equals(firebaseUser.getUid())) {
             sendNotification(remoteMessage);
         }
     }

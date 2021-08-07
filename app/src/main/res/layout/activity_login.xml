@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2ab1e0"
+    android:background="@drawable/bg_splash"
     tools:context=".MainActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarLogin"
@@ -19,7 +19,7 @@
         android:id="@+id/edtUsernameMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         android:hint="Email"
         android:textColorHint="#6E6A6A"
         android:textSize="18sp"
@@ -54,7 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/custom_button"
+        app:backgroundTint="@null"
         android:text="LOGIN"
+        android:textColor="#2ab1e0"
         android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

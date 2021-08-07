@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    >
+    <TextView
+        android:id="@+id/title_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Change Username"
+        android:textSize="18sp"
+        android:textStyle="bold"></TextView>
+
+    <EditText
+        android:id="@+id/edtOldUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title_popup"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/custom_edittext"
+        android:hint="Old username"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"></EditText>
+    <EditText
+        android:id="@+id/edtNewUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edtOldUsername"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:hint="New username"
+        android:background="@drawable/custom_edittext"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"></EditText>
+    <Button
+        android:id="@+id/btnOke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNewUsername"
+        app:layout_constraintRight_toLeftOf="@id/btnCancle"
+        android:layout_marginTop="5dp"
+        android:text="Ok"
+        android:textColor="#2ab1e0"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_button"></Button>
+    <Button
+        android:id="@+id/btnCancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNewUsername"
+       app:layout_constraintLeft_toRightOf="@id/btnOke"
+        android:layout_marginTop="5dp"
+        android:text="Cancle"
+        android:textColor="#2ab1e0"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_button"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

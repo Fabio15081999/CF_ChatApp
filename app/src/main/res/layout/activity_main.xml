@@ -30,9 +30,13 @@
         app:layout_constraintTop_toBottomOf="@+id/logo"></TextView>
    <Button
        android:id="@+id/btnLoginMain"
-       android:layout_width="wrap_content"
+       android:layout_width="200dp"
        android:layout_height="wrap_content"
        android:text="LOGIN"
+       android:textColor="#2ab1e0"
+       android:textSize="18sp"
+       android:background="@drawable/custom_button"
+       app:backgroundTint="@null"
        app:layout_constraintTop_toBottomOf="@+id/titleApp"
        app:layout_constraintLeft_toLeftOf="parent"
        app:layout_constraintRight_toRightOf="parent"></Button>
