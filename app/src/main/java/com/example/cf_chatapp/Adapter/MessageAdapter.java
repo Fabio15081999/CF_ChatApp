@@ -1,6 +1,8 @@
 package com.example.cf_chatapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cf_chatapp.R;
 import com.example.cf_chatapp.Model.Chat;
+import com.example.cf_chatapp.ShowImageActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -65,8 +68,21 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
 
         Chat chat = mChat.get(position);
+        String messageType = chat.getType();
 
-        holder.show_message.setText(chat.getMessage());
+        if (messageType.equals("text")){
+            holder.show_imageMessage.setVisibility(View.GONE);
+            holder.show_message.setVisibility(View.VISIBLE);
+            holder.show_message.setText(chat.getMessage());
+
+        }else{
+            holder.show_message.setVisibility(View.GONE);
+            holder.show_imageMessage.setVisibility(View.VISIBLE);
+            Picasso.get().load(chat.getMessage()).into(holder.show_imageMessage);
+            Log.d("AAAAAA",chat.getMessage());
+        }
+
+
 
         if (imageurl.equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -84,6 +100,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 //            holder.txt_seen.setVisibility(View.GONE);
 //        }
 
+        holder.show_imageMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShowImageActivity.class);
+                intent.putExtra("imageUrl", chat.getMessage());
+                mContext.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -95,6 +120,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         public TextView show_message;
         public ImageView profile_image;
+        public ImageView show_imageMessage;
        // public TextView txt_seen;
 
         public ViewHolder(View itemView) {
@@ -102,6 +128,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
+            show_imageMessage = itemView.findViewById(R.id.show_image);
            // txt_seen = itemView.findViewById(R.id.txt_seen);
         }
     }
