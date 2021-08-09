@@ -33,7 +33,7 @@
             android:layout_height="400dp"
             android:background="@drawable/backgroung_right"
             android:layout_alignParentRight="true"
-            android:scaleType="fitXY"></ImageView>
+            android:scaleType="centerCrop"></ImageView>
     </RelativeLayout>
 
 </RelativeLayout>

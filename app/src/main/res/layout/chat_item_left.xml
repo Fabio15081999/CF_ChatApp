@@ -26,5 +26,5 @@
         android:background="@drawable/background_left"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/profile_image"
-        android:scaleType="fitXY"></ImageView>
+        android:scaleType="centerCrop"></ImageView>
 </RelativeLayout>

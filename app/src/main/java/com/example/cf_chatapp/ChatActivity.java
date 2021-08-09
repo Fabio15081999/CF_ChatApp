@@ -361,6 +361,7 @@ public class ChatActivity extends AppCompatActivity {
     private void uploadImage() {
         i= getIntent();
         String receiver = i.getStringExtra("userId");
+        String sender = firebaseUser.getUid();
         final ProgressDialog pd = new ProgressDialog(ChatActivity.this);
         pd.setMessage("Loading.....");
         pd.show();
@@ -386,10 +387,11 @@ public class ChatActivity extends AppCompatActivity {
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("message", mUri);
-                        hashMap.put("sender", firebaseUser.getUid());
+                        hashMap.put("sender", sender);
                         hashMap.put("receiver", receiver);
                         hashMap.put("type","image");
                         reference.child("chats").push().setValue(hashMap);
+                        sendNotification(receiver,sender, "sent you a picture");
                         pd.dismiss();
                     } else {
                         Toast.makeText(ChatActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
