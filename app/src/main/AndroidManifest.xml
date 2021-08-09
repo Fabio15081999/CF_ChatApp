@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CF_ChatApp">
-        <activity android:name=".ShowImageActicity"></activity>
+        <activity android:name=".ShowImageActivity"></activity>
 
         <service
             android:name=".Notification.MyFirebaseMessagingService"
