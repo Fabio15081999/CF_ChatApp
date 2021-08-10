@@ -394,7 +394,7 @@ public class ChatActivity extends AppCompatActivity {
                         sendNotification(receiver,sender, "sent you a picture");
                         pd.dismiss();
                     } else {
-                        Toast.makeText(ChatActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChatActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
 
@@ -407,7 +407,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(ChatActivity.this, "No Image selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ChatActivity.this, R.string.failed_no_image_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -417,7 +417,7 @@ public class ChatActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
             if (uploadTask !=null && uploadTask.isInProgress()){
-                Toast.makeText(this, "upload in progress", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.upload_progress, Toast.LENGTH_SHORT).show();
             }else {
                 uploadImage();
             }

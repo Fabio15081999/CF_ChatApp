@@ -131,7 +131,7 @@ public class ContactsFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "The read failed: " + error.getCode(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.failed + error.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
     }

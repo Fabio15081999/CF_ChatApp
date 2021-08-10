@@ -1,34 +1,34 @@
 package com.example.cf_chatapp.Fragments;
 
-import android.app.Dialog;
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cf_chatapp.ChatActivity;
 import com.example.cf_chatapp.Login;
 import com.example.cf_chatapp.R;
 import com.example.cf_chatapp.Model.UserModel;
+import com.example.cf_chatapp.ShowImageActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,7 +48,9 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -57,15 +59,17 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class ProfileFragment extends Fragment {
+    private static final int REQUEST_CHOOSE_PICTURE = 11;
+    private static final int REQUEST_CAPTURE_PICTURE = 12;
     CircleImageView imageView;
-    TextView tvUsername, signOut, changeUsername;
+    TextView tvUsername, signOut, changeUsername, changeProfileImg;
     DatabaseReference reference;
     FirebaseUser firebaseUser;
     StorageReference storageReference;
-    private static final int IMAGE_REQUEST = 1;
     private Uri imageUri;
     private StorageTask uploadTask;
     private Context context;
+    private String profileImage;
 
 
     @Override
@@ -87,7 +91,7 @@ public class ProfileFragment extends Fragment {
         changeUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPopup(Gravity.CENTER);
+                openpopupChangeName(Gravity.CENTER);
             }
         });
 
@@ -99,11 +103,12 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserModel userModel = snapshot.getValue(UserModel.class);
+                profileImage = userModel.getAvatar();
                 tvUsername.setText(userModel.getUsername());
                 if (userModel.getAvatar().equals("default")) {
                     imageView.setImageResource(R.mipmap.ic_launcher);
                 } else {
-                    Picasso.get().load(userModel.getAvatar()).into(imageView);
+                    Picasso.get().load(profileImage).into(imageView);
                 }
 
             }
@@ -116,38 +121,70 @@ public class ProfileFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openImage();
+//                openImage();
+                Intent intent = new Intent(getActivity(), ShowImageActivity.class);
+                intent.putExtra("imageUrl", profileImage);
+                startActivity(intent);
+            }
+        });
+        changeProfileImg = view.findViewById(R.id.btnChangeProfileImage);
+        changeProfileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAndRequestPermissionsIfNeeded();
+//                openpopupChangepicture(Gravity.CENTER);
+                startChoosePicture(REQUEST_CHOOSE_PICTURE);
+
+
             }
         });
         return view;
     }
 
-    private void openPopup(int v) {
+//    private void openpopupChangepicture(int v) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        LayoutInflater inflater = this.getLayoutInflater();
+//        View view = inflater.inflate(R.layout.popup_change_profile_image, null);
+//        builder.setView(view);
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//        TextView tvChoosePicture = view.findViewById(R.id.tvChoosePicture);
+//        TextView tvCarpturePicture = view.findViewById(R.id.tvCapturePicture);
+//        tvChoosePicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startChoosePicture(REQUEST_CHOOSE_PICTURE);
+//            }
+//        });
+//        tvCarpturePicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startCapturePicture(REQUEST_CAPTURE_PICTURE);
+//            }
+//        });
+//    }
+
+    private void startCapturePicture(int requestCapturePicture) {
+
+
+    }
+
+    private void startChoosePicture(int requestChoosePicture) {
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(i, requestChoosePicture);
+
+    }
+
+    private void openpopupChangeName(int v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.popup_change_username, null);
         builder.setView(view);
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setContentView(R.layout.popup_change_username);
-//        Window window = dialog.getWindow();
-//
-//        if (window == null) {
-//            return;
-//        }
-//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-//        windowAttributes.gravity = v;
-//        window.setAttributes(windowAttributes);
-//        if (Gravity.BOTTOM== v){
-//            builder.setCancelable(true);
-//        }else {
-//            builder.setCancelable(false);
-//
-//        }
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        TextView tvOldUsername= view.findViewById(R.id.tvOldUsername);
+        TextView tvOldUsername = view.findViewById(R.id.tvOldUsername);
         EditText edtNewUsername = view.findViewById(R.id.edtNewUsername);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -155,7 +192,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 UserModel userModel = snapshot.getValue(UserModel.class);
-                tvOldUsername.setText("Old Username: "+userModel.getUsername());
+                tvOldUsername.setText("Old Username: " + userModel.getUsername());
 
             }
 
@@ -179,7 +216,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 String newUsername = edtNewUsername.getText().toString();
 
-                reference= FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+                reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
                 Map<String, Object> map = new HashMap<>();
                 map.put("username", newUsername);
                 reference.updateChildren(map);
@@ -192,12 +229,6 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void openImage() {
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(i, IMAGE_REQUEST);
-    }
 
     private String getFileExtension(Uri uri) {
         ContentResolver contentResolver = getContext().getContentResolver();
@@ -255,7 +286,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
+        if (requestCode == REQUEST_CHOOSE_PICTURE && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             imageUri = data.getData();
             if (uploadTask != null && uploadTask.isInProgress()) {
@@ -263,6 +294,42 @@ public class ProfileFragment extends Fragment {
             } else {
                 uploadImage();
             }
+        }
+    }
+
+    private void checkAndRequestPermissionsIfNeeded() {
+        String[] params = null;
+        String writeExternalStorage = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        String readExternalStorage = Manifest.permission.READ_EXTERNAL_STORAGE;
+        String cameraPermission = Manifest.permission.CAMERA;
+
+        // int hasWriteExternalStoragePermission;
+
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            hasWriteExternalStoragePermission = PackageManager.PERMISSION_GRANTED;
+//        } else {
+//            hasWriteExternalStoragePermission = ActivityCompat.checkSelfPermission(this, writeExternalStorage);
+//        }
+        int hasWriteExternalStoragePermission = ActivityCompat.checkSelfPermission(getContext(), writeExternalStorage);
+
+        int hasReadExternalStoragePermission = ActivityCompat.checkSelfPermission(getContext(), readExternalStorage);
+        int hasCameraPermission = ActivityCompat.checkSelfPermission(getContext(), cameraPermission);
+
+        List<String> permissions = new ArrayList<>();
+
+        if (hasWriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED)
+            permissions.add(writeExternalStorage);
+        if (hasReadExternalStoragePermission != PackageManager.PERMISSION_GRANTED)
+            permissions.add(readExternalStorage);
+        if (hasCameraPermission != PackageManager.PERMISSION_GRANTED)
+            permissions.add(cameraPermission);
+
+        if (!permissions.isEmpty()) {
+            params = permissions.toArray(new String[permissions.size()]);
+        }
+        if (params != null && params.length > 0) {
+            ActivityCompat.requestPermissions(getActivity(), params, 123);
+        } else {
         }
     }
 }

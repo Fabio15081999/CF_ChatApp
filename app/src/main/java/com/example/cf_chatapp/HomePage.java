@@ -68,17 +68,17 @@ public class HomePage extends AppCompatActivity {
                 Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        tvtiltle.setText("Chat");
+                        tvtiltle.setText(R.string.action_chats);
                         fragment = new ChatsFragment();
                         loadFragment(fragment);
                         break;
                     case R.id.action_contacts:
-                        tvtiltle.setText("Contacts");
+                        tvtiltle.setText(R.string.contacts);
                         fragment = new ContactsFragment();
                         loadFragment(fragment);
                         break;
                     case R.id.action_profile:
-                        tvtiltle.setText("Profile");
+                        tvtiltle.setText(R.string.profile);
                         fragment = new ProfileFragment();
                         loadFragment(fragment);
                         break;

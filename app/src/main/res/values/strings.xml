@@ -30,6 +30,14 @@
     <string name="oke">Oke</string>
     <string name="cancle">Cancle</string>
     <string name="hint_entermessage">Enter Message</string>
+    <string name="change_profileImg">Change Profile Image</string>
+    <string name="select_optional">Select Item</string>
+    <string name="choose_image">Choose Picture</string>
+    <string name="capture_picture">Capture Picture</string>
+    <string name="chat">Chat</string>
+    <string name="failed_no_image_selected">No Image selected</string>
+    <string name="failed">Failed!</string>
+    <string name="upload_progress">Upload in progress</string>
 
 
 </resources>

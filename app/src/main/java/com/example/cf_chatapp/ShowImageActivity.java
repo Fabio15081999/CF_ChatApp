@@ -24,6 +24,8 @@ public class ShowImageActivity extends AppCompatActivity {
         i = getIntent();
         String imageUrl = i.getStringExtra("imageUrl");
         Picasso.get().load(imageUrl).into(imageView);
+//        String profileImg = i.getStringExtra("profileImage");
+//        Picasso.get().load(profileImg).into(imageView);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override

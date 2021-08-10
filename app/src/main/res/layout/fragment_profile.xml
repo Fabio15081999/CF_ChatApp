@@ -46,8 +46,9 @@
             ></TextView>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardviewChangename"
+        android:id="@+id/cardviewChangeProfileImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
@@ -55,6 +56,25 @@
         android:layout_below="@id/cardview1"
         android:layout_marginTop="20dp"
         android:padding="10dp">
+        <TextView
+            android:id="@+id/btnChangeProfileImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_profileImg"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginLeft="15dp"></TextView>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewChangename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_below="@id/cardviewChangeProfileImage"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
         <TextView
             android:id="@+id/btnChangeUsername"
             android:layout_width="wrap_content"
