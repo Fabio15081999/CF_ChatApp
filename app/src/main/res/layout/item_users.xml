@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/profile_img"
-            android:text="username"
+            android:text="@string/hint_username"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>
 
@@ -38,7 +38,7 @@
             android:layout_below="@+id/tvUsernameContact"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/profile_img"
-            android:text="email"
+            android:text="@string/hint_email"
             android:textSize="10sp"></TextView>
 
         <ImageView

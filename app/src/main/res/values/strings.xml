@@ -9,4 +9,27 @@
     <string name="default_notification_channel_id">FCM mess channel</string>
 
 
+    <string name="Wellcome">Wellcome</string>
+    <string name="btnLogin">Login</string>
+    <string name="requestAcount">" Do not have an account?"</string>
+    <string name="Register">Register</string>
+    <string name="type_your_infor">Type Your Information</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btnSignUp">Register</string>
+    <string name="forgot_password">Forgot your password ?</string>
+    <string name="btnReset">Reset</string>
+    <string name="note_reset_password">By clicking button, you will receive an email to reset your password!</string>
+    <string name="back">Back</string>
+    <string name="change_username">Change Username</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="search_user">Search User</string>
+    <string name="old_username">Old username</string>
+    <string name="hint_new_username">New Username</string>
+    <string name="oke">Oke</string>
+    <string name="cancle">Cancle</string>
+    <string name="hint_entermessage">Enter Message</string>
+
+
 </resources>

@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="day la dai tieng noi "
+            android:text="@string/hint_username"
             android:textColor="@color/white"
             android:textSize="18sp"></TextView>
 
@@ -75,7 +75,7 @@
             android:layout_toStartOf="@+id/button_send"
             android:layout_toEndOf="@id/btnSendImage"
             android:background="@drawable/custom_edittext"
-            android:hint="Enter Message"
+            android:hint="@string/hint_entermessage"
             android:textSize="16sp"
             android:padding="5dp"
             android:inputType="text"

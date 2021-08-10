@@ -12,33 +12,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Change Username"
-        android:textSize="18sp"
-        android:textStyle="bold"></TextView>
-
-    <EditText
-        android:id="@+id/edtOldUsername"
-        android:layout_width="0dp"
+        android:text="@string/change_username"
+        android:textSize="25sp"></TextView>
+    <TextView
+        android:id="@+id/tvOldUsername"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/old_username"
+        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/title_popup"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/custom_edittext"
-        android:hint="Old username"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:padding="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"></EditText>
+        app:layout_constraintRight_toRightOf="parent"></TextView>
+
     <EditText
         android:id="@+id/edtNewUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edtOldUsername"
+        app:layout_constraintTop_toBottomOf="@id/tvOldUsername"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:hint="New username"
+        android:hint="@string/hint_new_username"
         android:background="@drawable/custom_edittext"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -54,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtNewUsername"
         app:layout_constraintRight_toLeftOf="@id/btnCancle"
         android:layout_marginTop="5dp"
-        android:text="Ok"
+        android:text="@string/oke"
         android:textColor="#2ab1e0"
         app:backgroundTint="@null"
         android:background="@drawable/custom_button"></Button>
@@ -66,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtNewUsername"
        app:layout_constraintLeft_toRightOf="@id/btnOke"
         android:layout_marginTop="5dp"
-        android:text="Cancle"
+        android:text="@string/cancle"
         android:textColor="#2ab1e0"
         app:backgroundTint="@null"
         android:background="@drawable/custom_button"></Button>

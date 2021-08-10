@@ -13,7 +13,7 @@
         android:padding="3dp"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/custom_edittext"
-        android:hint="Search User"
+        android:hint="@string/search_user"
         android:textSize="20sp"
 
         ></EditText>

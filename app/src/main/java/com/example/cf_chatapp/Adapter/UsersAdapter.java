@@ -2,6 +2,7 @@ package com.example.cf_chatapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
+    private static final String TAG = "Error Last Message";
     private Context mcontext;
     private List<UserModel> mUsers;
     private boolean isonline;
@@ -144,6 +146,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, error.getMessage());
 
             }
         });

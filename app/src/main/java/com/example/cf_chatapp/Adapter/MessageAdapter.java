@@ -25,6 +25,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public static  final int MSG_TYPE_LEFT = 0;
     public static  final int MSG_TYPE_RIGHT = 1;
+    private static final String TAG = "Chat Message";
 
     private Context mContext;
     private List<Chat> mChat;
@@ -79,7 +80,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.show_message.setVisibility(View.GONE);
             holder.show_imageMessage.setVisibility(View.VISIBLE);
             Picasso.get().load(chat.getMessage()).into(holder.show_imageMessage);
-            Log.d("AAAAAA",chat.getMessage());
+            Log.d(TAG,chat.getMessage());
         }
 
 

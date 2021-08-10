@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment {
 //        }
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        EditText edtOldUserName = view.findViewById(R.id.edtOldUsername);
+        TextView tvOldUsername= view.findViewById(R.id.tvOldUsername);
         EditText edtNewUsername = view.findViewById(R.id.edtNewUsername);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -155,7 +155,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 UserModel userModel = snapshot.getValue(UserModel.class);
-                edtOldUserName.setText(userModel.getUsername());
+                tvOldUsername.setText("Old Username: "+userModel.getUsername());
 
             }
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Back"
+        android:text="@string/back"
         android:textSize="18sp"
         android:layout_marginLeft="10dp"
         android:textColor="@color/black"></TextView>

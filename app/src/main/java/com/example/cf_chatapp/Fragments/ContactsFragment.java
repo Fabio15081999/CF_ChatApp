@@ -81,17 +81,21 @@ public class ContactsFragment extends Fragment {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
                 .startAt(s)
-                .endAt(s+"\uf8ff");
+                .endAt(s + "\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mUsers.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                    assert userModel != null;
-                    assert firebaseUser != null;
-                    if (!userModel.getId().equals(firebaseUser.getUid())){
-                        mUsers.add(userModel);
+//                    assert userModel != null;
+//                    assert firebaseUser != null;
+                    if (userModel != null) {
+
+                        if (!userModel.getId().equals(firebaseUser.getUid())) {
+                            mUsers.add(userModel);
+                        }
+
                     }
 
                 }
@@ -112,7 +116,7 @@ public class ContactsFragment extends Fragment {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (searchUser.getText().toString().equals("")){
+                if (searchUser.getText().toString().equals("")) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         UserModel userModel = dataSnapshot.getValue(UserModel.class);
                         if (!userModel.getId().equals(userId)) {
