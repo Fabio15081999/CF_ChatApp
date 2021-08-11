@@ -70,7 +70,7 @@ public class ContactsFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new UsersAdapter(getActivity(), mUsers, true);
+        adapter = new UsersAdapter(getActivity(), mUsers, false);
         recyclerView.setAdapter(adapter);
 
 

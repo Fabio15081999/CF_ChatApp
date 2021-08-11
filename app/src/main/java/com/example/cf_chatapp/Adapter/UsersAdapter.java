@@ -1,5 +1,6 @@
 package com.example.cf_chatapp.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -51,11 +52,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserModel userModel = mUsers.get(position);
         holder.username.setText(userModel.getUsername());
-        holder.email.setText(userModel.getEmail());
+        holder.email.setText("<" + userModel.getEmail() + ">");
         if (userModel.getAvatar().equals("default")) {
             holder.imProfile.setImageResource(R.mipmap.ic_launcher);
 
@@ -63,9 +65,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             Picasso.get().load(userModel.getAvatar()).into(holder.imProfile);
 
         }
-        if (isonline){
+        if (isonline) {
             lastMessage(userModel.getId(), holder.tvLastMessage);
-        }else {
+        } else {
             holder.tvLastMessage.setVisibility(View.GONE);
         }
         if (isonline) {
@@ -102,9 +104,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView username, email;
         ImageView imProfile;
-        private ImageView im_status_on;
-        private ImageView im_status_off;
-        private TextView tvLastMessage;
+        private final ImageView im_status_on;
+        private final ImageView im_status_off;
+        private final TextView tvLastMessage;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -123,6 +125,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("chats");
         reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -132,14 +135,21 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                         theLastMessage = chat.getMessage();
 
                     }
-                    switch (theLastMessage){
-                        case "default":
-                            last_msg.setText("no message");
-                            break;
-                        default:
-                            last_msg.setText(theLastMessage);
-                            break;
+                    if (chat.getSender().equals(firebaseUser.getUid())) {
+                        last_msg.setText("You" + ": " + theLastMessage);
+                    } else if (chat.getSender().equals(userId)) {
+                        last_msg.setText(theLastMessage);
+                    }else {
+                        last_msg.setText("no message");
                     }
+//                    switch (theLastMessage){
+//                        case "default":
+//                            last_msg.setText("no message");
+//                            break;
+//                        default:
+//                            last_msg.setText(theLastMessage);
+//                            break;
+//                    }
                     theLastMessage = "default";
                 }
             }

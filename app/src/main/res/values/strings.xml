@@ -38,6 +38,10 @@
     <string name="failed_no_image_selected">No Image selected</string>
     <string name="failed">Failed!</string>
     <string name="upload_progress">Upload in progress</string>
+    <string name="seen">Seen</string>
+    <string name="delivered">Delivered</string>
+    <string name="failed_to_send_notification">Failed! to send notificaation</string>
+    <string name="you">You</string>
 
 
 </resources>

@@ -42,20 +42,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        RecyclerView.ViewHolder viewHolder;
-//        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-//
-//        switch (viewType) {
-//            case MSG_TYPE_LEFT:
-//                View v2 = inflater.inflate(R.layout.chat_item_left, parent, false);
-//                viewHolder = new HolderYou(v2);
-//                break;
-//            default:
-//                View v = inflater.inflate(R.layout.chat_item_right, parent, false);
-//                viewHolder = new HolderMe(v);
-//                break;
-//        }
-//        return  viewHolder;
         if (viewType == MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
             return new MessageAdapter.ViewHolder(view);
@@ -83,23 +69,21 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             Log.d(TAG,chat.getMessage());
         }
 
-
-
         if (imageurl.equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else {
             Picasso.get().load(imageurl).into(holder.profile_image);
         }
 
-//        if (position == mChat.size()-1){
-//            if (chat.isIsseen()){
-//                holder.txt_seen.setText("Seen");
-//            } else {
-//                holder.txt_seen.setText("Delivered");
-//            }
-//        } else {
-//            holder.txt_seen.setVisibility(View.GONE);
-//        }
+        if (position == mChat.size()-1){
+            if (chat.isIsseen()){
+                holder.txt_seen.setText(R.string.seen);
+            } else {
+                holder.txt_seen.setText(R.string.delivered);
+            }
+        } else {
+            holder.txt_seen.setVisibility(View.GONE);
+        }
 
         holder.show_imageMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +106,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public TextView show_message;
         public ImageView profile_image;
         public ImageView show_imageMessage;
-       // public TextView txt_seen;
+        public TextView txt_seen;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -130,7 +114,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
             show_imageMessage = itemView.findViewById(R.id.show_image);
-           // txt_seen = itemView.findViewById(R.id.txt_seen);
+            txt_seen = itemView.findViewById(R.id.txt_seen);
         }
     }
 

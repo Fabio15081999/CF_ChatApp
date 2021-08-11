@@ -82,6 +82,7 @@ public class ChatActivity extends AppCompatActivity {
     final int REQUEST_CHOOSE_IMAGE = 102;
     private Uri imageUri;
     private StorageTask uploadTask;
+    ValueEventListener seenListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,12 +166,36 @@ public class ChatActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, REQUEST_CHOOSE_IMAGE  );
+                startActivityForResult(intent, REQUEST_CHOOSE_IMAGE);
 
             }
         });
+        seenMessage(userId);
 
 
+    }
+
+    private void seenMessage(String userId) {
+        reference = FirebaseDatabase.getInstance().getReference("chats");
+        seenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Chat chat = dataSnapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userId)){
+                        HashMap<String, Object> map= new HashMap<>();
+                        map.put("isseen",true);
+                        dataSnapshot.getRef().updateChildren(map);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void sendmessage(String sender, String receiver, String message) {
@@ -180,7 +205,8 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("message", message);
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
-        hashMap.put("type","text");
+        hashMap.put("type", "text");
+        hashMap.put("isseen",false);
         reference.child("chats").push().setValue(hashMap);
 
         final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
@@ -246,7 +272,7 @@ public class ChatActivity extends AppCompatActivity {
                                 assert response.body() != null;
                                 if (response.body().success != 1) {
 
-                                    Toast.makeText(ChatActivity.this, "Failed! to send notificaation", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ChatActivity.this, R.string.failed_to_send_notification, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -312,6 +338,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        reference.removeEventListener(seenListener);
         userStatus("offline");
     }
 
@@ -359,9 +386,9 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void uploadImage() {
-        i= getIntent();
+        i = getIntent();
         String receiver = i.getStringExtra("userId");
-        String sender = firebaseUser.getUid();
+        String sender = firebaseUser.getDisplayName();
         final ProgressDialog pd = new ProgressDialog(ChatActivity.this);
         pd.setMessage("Loading.....");
         pd.show();
@@ -389,9 +416,10 @@ public class ChatActivity extends AppCompatActivity {
                         hashMap.put("message", mUri);
                         hashMap.put("sender", sender);
                         hashMap.put("receiver", receiver);
-                        hashMap.put("type","image");
+                        hashMap.put("type", "image");
+                        hashMap.put("iseen",false);
                         reference.child("chats").push().setValue(hashMap);
-                        sendNotification(receiver,sender, "sent you a picture");
+                        sendNotification(receiver, sender, "sent you a picture");
                         pd.dismiss();
                     } else {
                         Toast.makeText(ChatActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
@@ -416,9 +444,9 @@ public class ChatActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-            if (uploadTask !=null && uploadTask.isInProgress()){
+            if (uploadTask != null && uploadTask.isInProgress()) {
                 Toast.makeText(this, R.string.upload_progress, Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 uploadImage();
             }
         }

@@ -5,6 +5,7 @@
     android:padding="8dp"
     android:layout_height="wrap_content">
     <RelativeLayout
+        android:id="@+id/relaytiveMessage"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true">
@@ -34,6 +35,18 @@
             android:background="@drawable/backgroung_right"
             android:layout_alignParentRight="true"
             android:scaleType="centerCrop"></ImageView>
+
     </RelativeLayout>
+    <TextView
+        android:id="@+id/txt_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seen"
+        android:textSize="10sp"
+        android:textColor="@color/black"
+        android:layout_below="@id/relaytiveMessage"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        ></TextView>
 
 </RelativeLayout>
