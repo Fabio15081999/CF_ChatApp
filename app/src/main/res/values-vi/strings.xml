@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CF_ChatApp</string>
+    <string name="action_chats">Chat</string>
+    <string name="contacts">Danh Bạ</string>
+    <string name="profile">Cá Nhân</string>
+
+    <string name="facebook_app_id">1269442603474387</string>
+    <string name="fb_login_protocol_scheme">fb1269442603474387</string>
+    <string name="default_notification_channel_id">FCM mess channel</string>
+
+
+    <string name="Wellcome">Chào Mừng</string>
+    <string name="btnLogin">Đăng Nhập</string>
+    <string name="requestAcount">"Bạn không có tài khoản?"</string>
+    <string name="Register">Đăng Kí</string>
+    <string name="type_your_infor">Nhập Thông Tin Người Dùng</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Mật Khẩu</string>
+    <string name="btnSignUp">Đăng ký</string>
+    <string name="forgot_password">Bạn quên mật khẩu?</string>
+    <string name="btnReset">Đặt Lại</string>
+    <string name="note_reset_password">Sau khi nhấn nút, bạn sẽ nhận được email khôi phục mật khẩu!</string>
+    <string name="back">Trở lại</string>
+    <string name="change_username">Thay Đổi Username</string>
+    <string name="sign_out">Đăng Xuất</string>
+    <string name="search_user">Tìm Kiếm User</string>
+    <string name="old_username">Tên Cũ</string>
+    <string name="hint_new_username">Tên Mới</string>
+    <string name="oke">Oke</string>
+    <string name="cancle">Cancle</string>
+    <string name="hint_entermessage">Nhập Tin Nhắn</string>
+    <string name="change_profileImg">Thay đổi ảnh đại diện</string>
+    <string name="select_optional">Select Item</string>
+    <string name="choose_image">Chọn Ảnh</string>
+    <string name="capture_picture">Chụp ảnh</string>
+    <string name="chat">Trò Chuyện</string>
+    <string name="failed_no_image_selected">Không có ảnh nào được chọn</string>
+    <string name="failed">Lỗi!</string>
+    <string name="upload_progress">Đang tiến hành</string>
+    <string name="seen">Đã xem!</string>
+    <string name="delivered">Đã Gửi</string>
+    <string name="failed_to_send_notification">Không gửi được thông báo</string>
+    <string name="sent_a_picture">Đã gửi hình ảnh</string>
+
+</resources>

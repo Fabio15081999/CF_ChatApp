@@ -27,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
@@ -36,6 +38,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     private List<UserModel> mUsers;
     private boolean isonline;
     private String theLastMessage;
+    private String msg_type;
+    String senderName;
 
     public UsersAdapter(Context mcontext, List<UserModel> mUsers, boolean isonline) {
         super();
@@ -130,27 +134,44 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Chat chat = dataSnapshot.getValue(Chat.class);
-                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userId) ||
-                            chat.getReceiver().equals(userId) && chat.getSender().equals(firebaseUser.getUid())) {
-                        theLastMessage = chat.getMessage();
+                    if(chat== null){
+                        return;
+                    } else {
+                        assert firebaseUser != null;
+                        if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userId) ||
+                                chat.getReceiver().equals(userId) && chat.getSender().equals(firebaseUser.getUid())) {
+                            theLastMessage = chat.getMessage();
+                            msg_type = chat.getType();
 
+                        }
                     }
-                    if (chat.getSender().equals(firebaseUser.getUid())) {
-                        last_msg.setText("You" + ": " + theLastMessage);
-                    } else if (chat.getSender().equals(userId)) {
-                        last_msg.setText(theLastMessage);
-                    }else {
-                        last_msg.setText("no message");
-                    }
-//                    switch (theLastMessage){
-//                        case "default":
-//                            last_msg.setText("no message");
-//                            break;
-//                        default:
+//                    if (theLastMessage.equals("default")) {
+//                        last_msg.setText("no message");
+//                    } else if (chat.getSender().equals(firebaseUser.getUid())) {
+//                        last_msg.setText("You: " + theLastMessage);
+//                    } else if (chat.getReceiver().equals(firebaseUser.getUid())){
 //                            last_msg.setText(theLastMessage);
-//                            break;
-//                    }
-                    theLastMessage = "default";
+//                        }
+                    switch (theLastMessage) {
+                        case "default":
+                            last_msg.setText("no message");
+                        default:
+                            if (chat.getSender().equals(firebaseUser.getUid())){
+                                if (msg_type.equals("image")){
+                                    last_msg.setText("You sent a picture");
+                                }else {
+                                    last_msg.setText("You: " + theLastMessage);
+                                }
+                            }else if (chat.getReceiver().equals(firebaseUser.getUid())){
+                                if (msg_type.equals("image")){
+                                    last_msg.setText("You received a picture");
+                                }else {
+                                    last_msg.setText("You: " + theLastMessage);
+                                }
+                            } else {
+                                last_msg.setText(theLastMessage);
+                            }
+                    }
                 }
             }
 
@@ -160,6 +181,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
             }
         });
+
     }
 
 }

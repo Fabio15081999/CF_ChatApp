@@ -117,6 +117,8 @@ public class ChatsFragment extends Fragment {
                 }
                 adapter = new UsersAdapter(getContext(), mUsers, true);
                 recyclerView.setAdapter(adapter);
+//                recyclerView.scrollToPosition(0);
+
             }
 
             @Override

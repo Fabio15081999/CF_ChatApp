@@ -41,7 +41,7 @@
     <string name="seen">Seen</string>
     <string name="delivered">Delivered</string>
     <string name="failed_to_send_notification">Failed! to send notificaation</string>
-    <string name="you">You</string>
+    <string name="sent_a_picture">Sent a picture</string>
 
 
 </resources>

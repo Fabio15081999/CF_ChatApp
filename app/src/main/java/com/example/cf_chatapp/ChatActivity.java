@@ -303,6 +303,7 @@ public class ChatActivity extends AppCompatActivity {
                 mchat.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Chat chat = dataSnapshot.getValue(Chat.class);
+                    assert chat != null;
                     if (chat.getReceiver().equals(myid) && chat.getSender().equals(userid) ||
                             chat.getReceiver().equals(userid) && chat.getSender().equals(myid)) {
                         mchat.add(chat);
@@ -310,6 +311,7 @@ public class ChatActivity extends AppCompatActivity {
                     adapter = new MessageAdapter(ChatActivity.this, mchat, imageurl);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                    recyclerView.scrollToPosition(mchat.size()-1);
                 }
             }
 
@@ -388,6 +390,7 @@ public class ChatActivity extends AppCompatActivity {
     private void uploadImage() {
         i = getIntent();
         String receiver = i.getStringExtra("userId");
+        String senderId = firebaseUser.getUid();
         String sender = firebaseUser.getDisplayName();
         final ProgressDialog pd = new ProgressDialog(ChatActivity.this);
         pd.setMessage("Loading.....");
@@ -414,7 +417,7 @@ public class ChatActivity extends AppCompatActivity {
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("message", mUri);
-                        hashMap.put("sender", sender);
+                        hashMap.put("sender", senderId);
                         hashMap.put("receiver", receiver);
                         hashMap.put("type", "image");
                         hashMap.put("iseen",false);
