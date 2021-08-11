@@ -83,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
     private Uri imageUri;
     private StorageTask uploadTask;
     ValueEventListener seenListener;
+    String senderName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,7 +240,8 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 if (notify) {
                     UserModel userModel = snapshot.getValue(UserModel.class);
-                    sendNotification(receiver, userModel.getUsername(), msg);
+
+                    sendNotification(receiver,userModel.getUsername(), msg);
 
 
                 }
@@ -391,7 +393,19 @@ public class ChatActivity extends AppCompatActivity {
         i = getIntent();
         String receiver = i.getStringExtra("userId");
         String senderId = firebaseUser.getUid();
-        String sender = firebaseUser.getDisplayName();
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                UserModel userModel = snapshot.getValue(UserModel.class);
+                 senderName = userModel.getUsername();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
         final ProgressDialog pd = new ProgressDialog(ChatActivity.this);
         pd.setMessage("Loading.....");
         pd.show();
@@ -422,7 +436,7 @@ public class ChatActivity extends AppCompatActivity {
                         hashMap.put("type", "image");
                         hashMap.put("iseen",false);
                         reference.child("chats").push().setValue(hashMap);
-                        sendNotification(receiver, sender, "sent you a picture");
+                        sendNotification(receiver, senderName, "sent you a picture");
                         pd.dismiss();
                     } else {
                         Toast.makeText(ChatActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
