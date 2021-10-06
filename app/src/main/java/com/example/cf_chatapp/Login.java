@@ -75,6 +75,10 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(Login.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
+        Intent i = getIntent();
+        String email = i.getStringExtra("email");
+        String pass = i.getStringExtra("pass");
+
         tvResetPass = findViewById(R.id.forgot_pass);
         tvResetPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +91,8 @@ public class Login extends AppCompatActivity {
 
         edtEmailLogin = (EditText) findViewById(R.id.edtUsernameMain);
         edtPasswordLogin = (EditText) findViewById(R.id.edtPassWord);
+        edtEmailLogin.setText(email);
+        edtPasswordLogin.setText(pass);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -219,6 +219,7 @@ public class ProfileFragment extends Fragment {
                 reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
                 Map<String, Object> map = new HashMap<>();
                 map.put("username", newUsername);
+                map.put("search", newUsername.toLowerCase());
                 reference.updateChildren(map);
                 Toast.makeText(getContext(), "Change username is successfully!", Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();

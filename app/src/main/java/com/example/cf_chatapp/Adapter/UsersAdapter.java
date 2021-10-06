@@ -134,7 +134,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Chat chat = dataSnapshot.getValue(Chat.class);
-                    if(chat== null){
+                    if (chat == null) {
                         return;
                     } else {
                         assert firebaseUser != null;
@@ -156,21 +156,25 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                         case "default":
                             last_msg.setText("no message");
                         default:
-                            if (chat.getSender().equals(firebaseUser.getUid())){
-                                if (msg_type.equals("image")){
-                                    last_msg.setText("You sent a picture");
-                                }else {
-                                    last_msg.setText("You: " + theLastMessage);
-                                }
-                            }else if (chat.getReceiver().equals(firebaseUser.getUid())){
-                                if (msg_type.equals("image")){
-                                    last_msg.setText("You received a picture");
-                                }else {
-                                    last_msg.setText("You: " + theLastMessage);
-                                }
-                            } else {
-                                last_msg.setText(theLastMessage);
-                            }
+                            last_msg.setText(theLastMessage);
+//                            if (chat.getSender().equals(firebaseUser.getUid())) {
+//                                if (msg_type.equals("text")) {
+//                                    last_msg.setText("You: " + theLastMessage);
+//
+//                                } else {
+//                                    last_msg.setText("You sent a picture");
+//
+//                                }
+//                            } else if (chat.getReceiver().equals(firebaseUser.getUid())) {
+//                                if (msg_type.equals("text")) {
+//                                    last_msg.setText("Message: " + theLastMessage);
+//                                } else {
+//
+//                                    last_msg.setText("You received a picture");
+//                                }
+//                            } else {
+//                                last_msg.setText(theLastMessage);
+//                            }
                     }
                 }
             }

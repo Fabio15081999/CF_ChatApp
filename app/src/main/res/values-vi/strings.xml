@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CF_ChatApp</string>
-    <string name="action_chats">Chat</string>
+    <string name="action_chats">Trò Chuyện</string>
     <string name="contacts">Danh Bạ</string>
     <string name="profile">Cá Nhân</string>
 
@@ -14,7 +14,7 @@
     <string name="btnLogin">Đăng Nhập</string>
     <string name="requestAcount">"Bạn không có tài khoản?"</string>
     <string name="Register">Đăng Kí</string>
-    <string name="type_your_infor">Nhập Thông Tin Người Dùng</string>
+    <string name="type_your_infor">Nhập Thông Tin</string>
     <string name="hint_username">Username</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Mật Khẩu</string>
