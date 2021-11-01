@@ -42,6 +42,8 @@
     <string name="delivered">Delivered</string>
     <string name="failed_to_send_notification">Failed! to send notificaation</string>
     <string name="sent_a_picture">Sent a picture</string>
+    <string name="notification_cant_register">Please enter your username, email or password to register</string>
+    <string name="notification_passwordLength">password must be more than 6 characters</string>
 
 
 </resources>

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.net.MailTo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -48,9 +49,15 @@ public class SignUp extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("SIGN UP");
+        actionBar.setTitle("Register");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUp.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -63,9 +70,9 @@ public class SignUp extends AppCompatActivity {
               String password = edtPass.getText().toString();
 
               if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){
-                  Toast.makeText(SignUp.this, "khong duoc de trong cac muc ", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(SignUp.this, R.string.notification_cant_register, Toast.LENGTH_SHORT).show();
               }else if (password.length() <6){
-                  Toast.makeText(SignUp.this, "pass phai lon hon 6 ky tu!", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(SignUp.this, R.string.notification_passwordLength, Toast.LENGTH_SHORT).show();
               }else {
                   signUp(username, email, password);
 

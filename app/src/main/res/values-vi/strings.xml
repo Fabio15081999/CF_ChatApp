@@ -43,5 +43,7 @@
     <string name="delivered">Đã Gửi</string>
     <string name="failed_to_send_notification">Không gửi được thông báo</string>
     <string name="sent_a_picture">Đã gửi hình ảnh</string>
+    <string name="notification_cant_register">Hãy Nhập username, email hoặc password để đăng kí</string>
+    <string name="notification_passwordLength">Mật khẩu phải lớn hơn 6 ký tự</string>
 
 </resources>
