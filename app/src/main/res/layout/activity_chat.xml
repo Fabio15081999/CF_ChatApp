@@ -61,8 +61,8 @@
             android:id="@+id/btnSendImage"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_sendimage"
-            android:layout_alignParentStart="true"></ImageView>
+            android:layout_alignParentStart="true"
+            android:src="@drawable/add"></ImageView>
 
 
         <EditText
@@ -76,10 +76,10 @@
             android:layout_toEndOf="@id/btnSendImage"
             android:background="@drawable/custom_edittext"
             android:hint="@string/hint_entermessage"
-            android:textSize="16sp"
-            android:padding="5dp"
             android:inputType="text"
             android:maxLines="6"
+            android:padding="5dp"
+            android:textSize="16sp"
             tools:ignore="Autofill" />
 
         <ImageView
@@ -88,7 +88,7 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_send"></ImageView>
+            android:src="@drawable/send_message"></ImageView>
 
     </RelativeLayout>
 

@@ -15,17 +15,18 @@
     android:textSize="18sp"
     android:layout_toRightOf="@+id/profile_image"
     android:layout_marginLeft="5dp"
-    android:text="day la di tieng noi viet nam"
+    android:text="day la dai tieng noi viet nam"
     android:textColor="@color/black"
     android:padding="8dp"
     android:background="@drawable/background_left"></TextView>
+
     <ImageView
         android:id="@+id/show_image"
         android:layout_width="250dp"
         android:layout_height="300dp"
-        android:background="@drawable/background_left"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/profile_image"
+        android:background="@drawable/background_left"
         android:scaleType="centerCrop"></ImageView>
     <TextView
         android:id="@+id/txt_seen"
