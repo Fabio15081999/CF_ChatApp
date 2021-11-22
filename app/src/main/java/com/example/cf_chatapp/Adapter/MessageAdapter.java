@@ -3,6 +3,7 @@ package com.example.cf_chatapp.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cf_chatapp.R;
@@ -100,9 +102,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             @Override
             public boolean onLongClick(View view) {
                 Toast.makeText(view.getContext(), "long click", Toast.LENGTH_SHORT).show();
+                openPopupOptional(Gravity.CENTER);
                 return false;
             }
         });
+    }
+
+    private void openPopupOptional(int v) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        LayoutInflater inflater = this.getLayoutInflater();
+//        View view = inflater.inflate(R.layout.popup_change_username, null);
+//        builder.setView(view);
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
     }
 
     @Override

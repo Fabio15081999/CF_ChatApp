@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="3">
+    <TextView
+        android:id="@+id/tvReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Trả Lời"
+        android:textSize="18sp"
+        android:layout_weight="1"></TextView>
+    <TextView
+        android:id="@+id/tvShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Chuyển Tiếp"
+        android:textSize="18sp"
+        android:layout_weight="1"
+        ></TextView>
+    <TextView
+        android:id="@+id/tvOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Khác..."
+        android:textSize="18sp"
+        android:layout_weight="1"></TextView>
+
+</LinearLayout>

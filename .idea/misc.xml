@@ -11,6 +11,8 @@
         <entry key="..\:/Project/CF_ChatApp/app/src/main/res/layout/chat_item_left.xml" value="0.24048913043478262" />
         <entry key="..\:/Project/CF_ChatApp/app/src/main/res/layout/fragment_chats.xml" value="0.24048913043478262" />
         <entry key="..\:/Project/CF_ChatApp/app/src/main/res/layout/item_message.xml" value="0.24048913043478262" />
+        <entry key="..\:/Project/CF_ChatApp/app/src/main/res/layout/popup_change_username.xml" value="0.23143115942028986" />
+        <entry key="..\:/Project/CF_ChatApp/app/src/main/res/layout/popup_optional_message.xml" value="0.23143115942028986" />
       </map>
     </option>
   </component>
